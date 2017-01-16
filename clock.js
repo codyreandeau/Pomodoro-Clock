@@ -5,7 +5,7 @@ var pomodoro = function(){
     if(this.running){
       this.stop();
       this.running = false;
-      $("#start").text("Go");
+      $("#start").text("Go!");
     }
     else{
       this.start();
@@ -13,28 +13,33 @@ var pomodoro = function(){
       $("#start").text("Pause");
     }
   };
-  this.seconds = 25*60;
+  this.seconds = 25 * 60;
   this.start = function(){
     clearInterval(x.intervId);
-    this.intervId = setInterval(this.tick,1000);
+    this.intervId = setInterval(this.tick, 1000);
   };
   this.stop = function(){
     clearInterval(x.intervId);
   };
   this.increase = function(){
     this.seconds += 60;
-    this.stop();
     this.update();
   };
   this.decrease = function(){
     this.seconds -= 60;
-    this.stop();
     this.update();
   };
+  this.reset = function(){
+    $("#start").text('Go!');
+    this.seconds = 25 * 60;
+    this.running = false;
+    this.update();
+    this.stop();
+  };
   this.tick = function(){
-   if(x.seconds <=0 ){
-     alert("Time's up! Take a Break!");
+   if(x.seconds < 1 ){
      clearInterval(x.intervId);
+     this.stop();
    }
    x.seconds--;
    x.update();
@@ -50,6 +55,10 @@ var pomodoro = function(){
     if(minutes < 10){
       time = '0'+time;
     }
+    if(time === '00:00'){
+      this.stop();
+      time = 'Times Up!';
+    }
     $("#time").text(time)
   };
 };
@@ -62,4 +71,7 @@ $("#increase").click(function(){
 });
 $("#decrease").click(function(){
   pomodoro.decrease();
+});
+$("#reset").click(function(){
+  pomodoro.reset();
 });
