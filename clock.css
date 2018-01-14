@@ -135,11 +135,11 @@ button:hover {
 
 @media(max-width:430px){
   #increase {
-    margin: -75px 80px 0px 0px;
+    margin: -15px 50px 0px 0px;
   }
   
   #decrease {
-    margin: -75px 0px 0px 80px;
+    margin: -15px 0px 0px 50px;
   }
   
   #container {

@@ -46,6 +46,7 @@ var pomodoro = function(){
   };
   this.update = function(){
     var time;
+    var alarm = new Audio('http://d-gun.com/files/sounds/WARNING2.WAV');
     var seconds = x.seconds % 60;
     var minutes = Math.floor(x.seconds / 60);
     time = minutes+':'+seconds;
@@ -58,6 +59,7 @@ var pomodoro = function(){
     if(time === '00:00'){
       this.stop();
       time = 'Times Up!';
+      alarm.play();
     }
     $("#time").text(time)
   };
